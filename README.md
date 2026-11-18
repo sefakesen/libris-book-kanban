@@ -98,13 +98,17 @@ libris-book-kanban/
 Ön gereksinim: **Node.js 18+** ve **npm**
 
 ```bash
-# 1. Bağımlılıkları yükleyin
+# 1. Depoyu klonlayın ve klasöre girin
+git clone https://github.com/sefakesen/libris-book-kanban.git
+cd libris-book-kanban
+
+# 2. Bağımlılıkları yükleyin
 npm install
 
-# 2. Geliştirme sunucusunu başlatın
+# 3. Geliştirme sunucusunu başlatın
 npm run dev
 
-# 3. Üretim derlemesi (Production Build) alın
+# 4. Üretim derlemesi (Production Build) alın
 npm run build
 ```
 
@@ -136,7 +140,7 @@ git init
 git add .
 git commit -m "feat: LIBRIS kitap okuma kanban uygulamasi"
 git branch -M main
-git remote add origin https://github.com/<kullanici-adin>/libris-book-kanban.git
+git remote add origin https://github.com/sefakesen/libris-book-kanban.git
 git push -u origin main
 ```
 
