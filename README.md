@@ -84,6 +84,7 @@ libris-book-kanban/
 │   ├── App.jsx
 │   ├── main.jsx
 │   └── index.css
+├── .gitignore
 ├── index.html
 ├── netlify.toml
 ├── vercel.json

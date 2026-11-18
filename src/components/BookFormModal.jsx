@@ -2,6 +2,7 @@ import { Globe, Loader2, Search, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { CATEGORY_LIST, KANBAN_COLUMNS } from '../constants/bookConstants';
 import { searchOpenLibraryBooks } from '../utils/api';
+import { sanitizeHttpUrl } from '../utils/storage';
 import BookCover from './BookCover';
 
 const DEFAULT_FORM = {
@@ -118,6 +119,17 @@ export default function BookFormModal({
         setFormError(`Mevcut sayfa 0 ile ${total} arasında geçerli bir değer olmalıdır.`);
         return;
       }
+    }
+    if (form.publishedYear !== '' && form.publishedYear !== null && form.publishedYear !== undefined) {
+      const year = Number(form.publishedYear);
+      if (!Number.isInteger(year) || year < 100 || year > 2100) {
+        setFormError('Yayın yılı 100 ile 2100 arasında geçerli bir tam yıl olmalıdır.');
+        return;
+      }
+    }
+    if (form.coverUrl.trim() && !sanitizeHttpUrl(form.coverUrl)) {
+      setFormError('Kapak görseli için geçerli bir http:// veya https:// bağlantısı girin.');
+      return;
     }
     onSubmit(form);
     onClose();

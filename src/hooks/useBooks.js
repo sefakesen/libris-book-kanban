@@ -7,6 +7,12 @@ import {
   saveLibraryState,
 } from '../utils/storage';
 
+function parsePublishedYear(value) {
+  if (value === '' || value === null || value === undefined) return null;
+  const rawYear = Number(value);
+  return Number.isInteger(rawYear) && rawYear >= 100 && rawYear <= 2100 ? rawYear : null;
+}
+
 export function useBooks() {
   const [state, setState] = useState(() => loadLibraryState());
   const [storageError, setStorageError] = useState('');
@@ -46,9 +52,7 @@ export function useBooks() {
         : 0;
     }
 
-    const rawYear = Number(formData.publishedYear);
-    const publishedYear =
-      Number.isInteger(rawYear) && rawYear >= 100 && rawYear <= 2100 ? rawYear : null;
+    const publishedYear = parsePublishedYear(formData.publishedYear);
 
     const now = new Date().toISOString();
     const newBook = {
@@ -116,7 +120,9 @@ export function useBooks() {
               ? sanitizeHttpUrl(updates.coverUrl)
               : book.coverUrl,
           publishedYear:
-            updates.publishedYear !== undefined ? updates.publishedYear : book.publishedYear,
+            updates.publishedYear !== undefined
+              ? parsePublishedYear(updates.publishedYear)
+              : book.publishedYear,
           rating:
             updates.rating !== undefined
               ? Math.max(0, Math.min(5, Math.round(Number(updates.rating) || 0)))
