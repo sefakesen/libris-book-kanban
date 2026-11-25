@@ -30,10 +30,18 @@ export default function BookCard({
     <article
       draggable
       onDragStart={(e) => onDragStart(e, book.id)}
-      className="group rounded-xl border border-border-subtle bg-bg-card p-3.5 shadow-[0_1px_2px_rgba(0,0,0,0.03)] hover:border-text-secondary/40 transition-all space-y-3"
+      className="group catalog-card rounded-xl p-3.5 hover:border-border-brass/70 transition-all space-y-3 relative overflow-hidden"
     >
-      {/* Üst Satır: Kapak + Temel Bilgiler */}
-      <div className="flex gap-3 items-start">
+      {/* Okunuyor kartlarında üstten sarkan kurdele ayraç */}
+      {book.status === 'reading' && (
+        <div
+          className="ribbon-bookmark absolute top-0 right-8 w-3.5 h-6 pointer-events-none"
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Üst Satır: 3B Kapak + Temel Bilgiler */}
+      <div className="flex gap-3.5 items-start">
         <button
           type="button"
           onClick={() => onOpenDetail(book)}
@@ -63,7 +71,7 @@ export default function BookCard({
             onClick={() => onOpenDetail(book)}
             className="text-left block w-full mt-1.5 cursor-pointer group/title"
           >
-            <h4 className="font-serif text-base font-medium text-text-primary leading-snug line-clamp-2 group-hover/title:text-accent-primary transition-colors">
+            <h4 className="font-display text-[17px] font-semibold text-text-primary leading-snug line-clamp-2 group-hover/title:text-accent-primary transition-colors">
               {book.title}
             </h4>
           </button>
@@ -89,7 +97,7 @@ export default function BookCard({
 
       {/* Okuma İlerlemesi (Okunuyor) */}
       {book.status === 'reading' && (
-        <div className="rounded-lg border border-border-subtle/70 bg-bg-primary px-3 py-2 space-y-1.5">
+        <div className="rounded-lg border border-border-subtle bg-bg-primary/80 px-3 py-2 space-y-1.5">
           <div className="flex items-center justify-between text-[11px] font-mono tabular-nums">
             <span className="text-text-secondary">
               Sayfa <strong className="text-text-primary">{book.currentPage}</strong> /{' '}
@@ -142,7 +150,7 @@ export default function BookCard({
             onClick={() => onOpenDetail(book)}
             className="text-[11px] font-medium text-accent-primary hover:underline cursor-pointer"
           >
-            Detay & Alıntı Ekle
+            Detay &amp; Alıntı Ekle
           </button>
         </div>
       )}
@@ -172,7 +180,7 @@ export default function BookCard({
           <button
             type="button"
             onClick={() => onMoveStatus(book.id, nextColumn.id)}
-            className="ml-auto inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md border border-accent-primary/30 bg-accent-primary-soft text-accent-primary hover:opacity-90 text-[11px] font-semibold transition-opacity cursor-pointer"
+            className="ml-auto inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md border border-accent-primary/35 bg-accent-primary-soft text-accent-primary hover:opacity-90 text-[11px] font-semibold transition-opacity cursor-pointer"
           >
             <span>{nextColumn.label}</span>
             <ArrowRight className="w-3 h-3" />

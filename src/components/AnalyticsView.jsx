@@ -59,9 +59,9 @@ export default function AnalyticsView({
     <section className="space-y-8">
       <div>
         <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent-primary font-semibold">
-          OKUMA İSTATİSTİKLERİ & VERİ YÖNETİMİ
+          KÜTÜPHANE SİCİLİ &amp; VERİ SANDIĞI
         </span>
-        <h2 className="font-serif text-3xl font-medium text-text-primary mt-1">
+        <h2 className="font-display text-3xl sm:text-4xl font-semibold text-text-primary mt-1">
           Hedef ve Kütüphane Analizi
         </h2>
         <p className="text-sm text-text-secondary mt-1">
@@ -84,104 +84,109 @@ export default function AnalyticsView({
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Kategori Dağılımı */}
-        <div className="lg:col-span-7 rounded-xl border border-border-subtle bg-bg-card p-6 space-y-5">
-          <div className="flex items-center justify-between border-b border-border-subtle pb-3">
-            <h3 className="font-serif text-xl font-medium text-text-primary">
+        <div className="lg:col-span-7 catalog-card rounded-xl overflow-hidden">
+          <div className="wood-beam px-6 py-3.5 flex items-center justify-between text-[#F5EBDD]">
+            <h3 className="font-display text-xl font-semibold text-[#F7EFE2]">
               Kategori Bazlı Kütüphane Dağılımı
             </h3>
-            <span className="font-mono text-xs text-text-secondary tabular-nums">
+            <span className="font-mono text-xs text-[#D8B46A] tabular-nums">
               {state.books.length} kitap
             </span>
           </div>
 
-          {categoryBreakdown.length === 0 ? (
-            <p className="text-xs text-text-secondary">Henüz kitap bulunmuyor.</p>
-          ) : (
-            <div className="space-y-4">
-              {categoryBreakdown.map((cat) => (
-                <div key={cat.id} className="space-y-1.5">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-medium text-text-primary">{cat.label}</span>
-                    <span className="font-mono text-text-secondary tabular-nums">
-                      {cat.count} kitap ({cat.completed} bitti) · {cat.pagesRead.toLocaleString('tr-TR')} syf
-                    </span>
+          <div className="p-6 space-y-5">
+            {categoryBreakdown.length === 0 ? (
+              <p className="text-xs text-text-secondary">Henüz kitap bulunmuyor.</p>
+            ) : (
+              <div className="space-y-4">
+                {categoryBreakdown.map((cat) => (
+                  <div key={cat.id} className="space-y-1.5">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="font-medium text-text-primary">{cat.label}</span>
+                      <span className="font-mono text-text-secondary tabular-nums">
+                        {cat.count} kitap ({cat.completed} bitti) ·{' '}
+                        {cat.pagesRead.toLocaleString('tr-TR')} syf
+                      </span>
+                    </div>
+                    <div className="h-2.5 w-full rounded-full bg-bg-secondary overflow-hidden">
+                      <div
+                        className={`h-full transition-all duration-300 ${cat.barClass}`}
+                        style={{ width: `${cat.sharePct}%` }}
+                      />
+                    </div>
                   </div>
-                  <div className="h-2.5 w-full rounded-full bg-bg-secondary overflow-hidden">
-                    <div
-                      className={`h-full transition-all duration-300 ${cat.barClass}`}
-                      style={{ width: `${cat.sharePct}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+                ))}
+              </div>
+            )}
 
-          {/* Kanban Durum Dağılım Özeti */}
-          <div className="pt-4 border-t border-border-subtle grid grid-cols-3 gap-3">
-            {KANBAN_COLUMNS.map((col) => {
-              const count = state.books.filter((b) => b.status === col.id).length;
-              return (
-                <div
-                  key={col.id}
-                  className="rounded-lg border border-border-subtle bg-bg-primary p-3"
-                >
-                  <div className="flex items-center gap-1.5 text-xs text-text-secondary">
-                    <span className={`w-2 h-2 rounded-full ${col.dotClass}`} />
-                    <span>{col.label}</span>
+            {/* Kanban Durum Dağılım Özeti */}
+            <div className="pt-4 border-t border-border-subtle grid grid-cols-3 gap-3">
+              {KANBAN_COLUMNS.map((col) => {
+                const count = state.books.filter((b) => b.status === col.id).length;
+                return (
+                  <div
+                    key={col.id}
+                    className="rounded-lg border border-border-subtle bg-bg-primary p-3"
+                  >
+                    <div className="flex items-center gap-1.5 text-xs text-text-secondary">
+                      <span className={`w-2 h-2 rounded-full ${col.dotClass}`} />
+                      <span>{col.label}</span>
+                    </div>
+                    <div className="font-mono text-xl font-semibold text-text-primary tabular-nums mt-1">
+                      {count}
+                    </div>
                   </div>
-                  <div className="font-mono text-xl font-semibold text-text-primary tabular-nums mt-1">
-                    {count}
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
 
         {/* Yıllık Hedef & JSON Yedekleme */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="rounded-xl border border-border-subtle bg-bg-card p-6 space-y-4">
-            <div className="flex items-center gap-2 border-b border-border-subtle pb-3">
-              <Target className="w-4 h-4 text-accent-primary" />
-              <h3 className="font-serif text-xl font-medium text-text-primary">
+          <div className="catalog-card rounded-xl overflow-hidden">
+            <div className="wood-beam px-6 py-3.5 flex items-center gap-2 text-[#F5EBDD]">
+              <Target className="w-4 h-4 text-[#D8B46A]" />
+              <h3 className="font-display text-xl font-semibold text-[#F7EFE2]">
                 Yıllık Okuma Hedefi
               </h3>
             </div>
 
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <div className="text-xs text-text-secondary">Tamamlanan / Hedef</div>
-                <div className="font-mono text-2xl font-semibold text-text-primary tabular-nums mt-0.5">
-                  {summary.completedCount} / {state.settings.yearlyGoal} kitap
+            <div className="p-6 space-y-4">
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <div className="text-xs text-text-secondary">Tamamlanan / Hedef</div>
+                  <div className="font-mono text-2xl font-semibold text-text-primary tabular-nums mt-0.5">
+                    {summary.completedCount} / {state.settings.yearlyGoal} kitap
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <label htmlFor="yearly-goal-input" className="text-xs text-text-secondary">
+                    Hedef:
+                  </label>
+                  <input
+                    id="yearly-goal-input"
+                    type="number"
+                    min={1}
+                    max={500}
+                    value={state.settings.yearlyGoal}
+                    onChange={(e) => onUpdateYearlyGoal(e.target.value)}
+                    className="w-20 rounded-lg border border-border-subtle bg-bg-primary px-2.5 py-1.5 font-mono text-sm text-text-primary"
+                  />
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                <label htmlFor="yearly-goal-input" className="text-xs text-text-secondary">
-                  Hedef:
-                </label>
-                <input
-                  id="yearly-goal-input"
-                  type="number"
-                  min={1}
-                  max={500}
-                  value={state.settings.yearlyGoal}
-                  onChange={(e) => onUpdateYearlyGoal(e.target.value)}
-                  className="w-20 rounded-lg border border-border-subtle bg-bg-primary px-2.5 py-1.5 font-mono text-sm text-text-primary"
+
+              <div className="h-2.5 w-full rounded-full bg-bg-secondary overflow-hidden">
+                <div
+                  className="h-full bg-accent-primary transition-all duration-300"
+                  style={{ width: `${summary.goalProgress}%` }}
                 />
               </div>
             </div>
-
-            <div className="h-2.5 w-full rounded-full bg-bg-secondary overflow-hidden">
-              <div
-                className="h-full bg-accent-primary transition-all duration-300"
-                style={{ width: `${summary.goalProgress}%` }}
-              />
-            </div>
           </div>
 
-          <div className="rounded-xl border border-border-subtle bg-bg-card p-6 space-y-4">
-            <h3 className="font-serif text-xl font-medium text-text-primary border-b border-border-subtle pb-3">
+          <div className="catalog-card rounded-xl p-6 space-y-4 paper-grain">
+            <h3 className="font-display text-xl font-semibold text-text-primary border-b border-border-subtle pb-3">
               LocalStorage Yedekleme (JSON)
             </h3>
             <p className="text-xs text-text-secondary leading-relaxed">
@@ -219,17 +224,17 @@ export default function AnalyticsView({
       </div>
 
       {/* Yönerge Uyumluluk Kartı */}
-      <div className="rounded-xl border border-border-subtle bg-bg-card p-6 space-y-4 paper-grain">
+      <div className="catalog-card rounded-xl p-6 space-y-4 paper-grain">
         <div className="flex items-center gap-2">
           <FileCode2 className="w-5 h-5 text-accent-primary" />
-          <h3 className="font-serif text-xl font-medium text-text-primary">
+          <h3 className="font-display text-xl font-semibold text-text-primary">
             Web Geliştirme Proje Yönergesi Mimarisi
           </h3>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 text-xs">
           <div className="rounded-lg border border-border-subtle bg-bg-primary p-4 space-y-1">
             <span className="font-mono text-[10px] text-accent-primary font-semibold">
-              TEKNOLOJİ & API
+              TEKNOLOJİ &amp; API
             </span>
             <p className="text-text-secondary leading-relaxed">
               React 19, Vite 6, Tailwind CSS v4, LocalStorage kalıcılığı ve canlı Open Library

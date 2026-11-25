@@ -137,30 +137,35 @@ export default function BookFormModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-[2px] p-4 overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/55 backdrop-blur-[2px] p-4 overflow-y-auto"
       role="dialog"
       aria-modal="true"
       aria-labelledby="book-form-modal-title"
     >
-      <div className="w-full max-w-2xl rounded-xl border border-border-subtle bg-bg-card shadow-xl overflow-hidden my-6">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-border-subtle bg-bg-secondary/50">
-          <h2 id="book-form-modal-title" className="font-serif text-xl font-medium text-text-primary">
-            {editingBook ? 'Kitap Bilgilerini Düzenle' : 'Kütüphaneye Kitap Ekle'}
-          </h2>
+      <div className="w-full max-w-2xl rounded-xl border border-border-subtle bg-bg-card shadow-2xl overflow-hidden my-6">
+        <div className="wood-beam flex items-center justify-between px-6 py-4 text-[#F5EBDD]">
+          <div>
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#D8B46A] block">
+              KÜTÜPHANE KAYIT FİŞİ
+            </span>
+            <h2 id="book-form-modal-title" className="font-display text-2xl font-semibold text-[#F7EFE2]">
+              {editingBook ? 'Eser Bilgilerini Düzenle' : 'Kütüphaneye Yeni Eser Ekle'}
+            </h2>
+          </div>
           <button
             type="button"
             onClick={onClose}
             aria-label="Kapat"
-            className="p-1.5 rounded-md text-text-secondary hover:text-text-primary hover:bg-bg-secondary cursor-pointer"
+            className="p-1.5 rounded-md text-[#E5D7C3] hover:text-white hover:bg-black/30 cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        <div className="p-6 space-y-6 max-h-[82vh] overflow-y-auto">
+        <div className="p-6 space-y-6 max-h-[80vh] overflow-y-auto">
           {/* Open Library API Arama Bloğu */}
           {!editingBook && (
-            <div className="rounded-xl border border-border-subtle bg-bg-secondary/45 p-4 space-y-3">
+            <div className="rounded-xl border border-border-subtle bg-bg-secondary/50 p-4 space-y-3 paper-grain">
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-1.5 text-xs font-semibold text-accent-primary">
                   <Globe className="w-4 h-4" />
@@ -361,7 +366,7 @@ export default function BookFormModal({
 
                 <div className="sm:col-span-2">
                   <label className="block text-xs font-semibold text-text-primary mb-1">
-                    Kapak Görsel URL (Boş bırakılırsa tipografik kapak oluşturulur)
+                    Kapak Görsel URL (Boş bırakılırsa 3B tipografik cilt oluşturulur)
                   </label>
                   <input
                     type="url"

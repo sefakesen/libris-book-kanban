@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  --font-display: "Cormorant Garamond", "Newsreader", Georgia, serif;
   --font-serif: "Newsreader", Georgia, Cambria, "Times New Roman", serif;
   --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -8,7 +9,11 @@
   --color-bg-primary: var(--bg-primary);
   --color-bg-secondary: var(--bg-secondary);
   --color-bg-card: var(--bg-card);
+  --color-bg-wood: var(--bg-wood);
+  --color-bg-wood-light: var(--bg-wood-light);
+  --color-bg-wood-ledge: var(--bg-wood-ledge);
   --color-border-subtle: var(--border-subtle);
+  --color-border-brass: var(--border-brass);
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-accent-primary: var(--accent-primary);
@@ -21,35 +26,45 @@
 }
 
 :root {
-  --bg-primary: #F8F5EE;
-  --bg-secondary: #EFE9DC;
-  --bg-card: #FFFDF8;
-  --border-subtle: #DFD6C5;
-  --text-primary: #1C1917;
-  --text-secondary: #645C52;
-  --accent-primary: #1E4D3B;
-  --accent-primary-soft: #E3EEE9;
-  --accent-warm: #A64B2A;
-  --accent-warm-soft: #F6E8E2;
-  --accent-amber: #9A6715;
-  --accent-amber-soft: #FBF2DF;
+  --bg-primary: #F2E8D9;
+  --bg-secondary: #E6D7C3;
+  --bg-card: #FAF4EA;
+  --bg-wood: #3B2417;
+  --bg-wood-light: #563624;
+  --bg-wood-ledge: #26150C;
+  --border-subtle: #D3C0A8;
+  --border-brass: #B5893D;
+  --text-primary: #231912;
+  --text-secondary: #5F4D3F;
+  --accent-primary: #1F4A38;
+  --accent-primary-soft: #DFECE4;
+  --accent-warm: #8B2E24;
+  --accent-warm-soft: #F3DFDC;
+  --accent-amber: #A66A17;
+  --accent-amber-soft: #F8EBD2;
   --danger: #991B1B;
+  --lamp-glow: rgba(214, 152, 62, 0.14);
 }
 
 [data-theme="dark"] {
-  --bg-primary: #13110F;
-  --bg-secondary: #1C1916;
-  --bg-card: #231F1B;
-  --border-subtle: #37312A;
-  --text-primary: #F3EFE6;
-  --text-secondary: #A69D91;
-  --accent-primary: #4A9B78;
-  --accent-primary-soft: #1B3228;
-  --accent-warm: #D97753;
-  --accent-warm-soft: #3A2219;
-  --accent-amber: #D89C38;
-  --accent-amber-soft: #342815;
+  --bg-primary: #16110D;
+  --bg-secondary: #211A14;
+  --bg-card: #281F18;
+  --bg-wood: #2A1910;
+  --bg-wood-light: #3E2619;
+  --bg-wood-ledge: #120A06;
+  --border-subtle: #3E3025;
+  --border-brass: #C89B4B;
+  --text-primary: #F4E9D8;
+  --text-secondary: #B39F8A;
+  --accent-primary: #4FA37D;
+  --accent-primary-soft: #1A3126;
+  --accent-warm: #D46559;
+  --accent-warm-soft: #3B1D1A;
+  --accent-amber: #E0A343;
+  --accent-amber-soft: #382812;
   --danger: #F87171;
+  --lamp-glow: rgba(224, 163, 67, 0.16);
 }
 
 * {
@@ -64,16 +79,126 @@ body {
   color: var(--text-primary);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }
 
+/* Sıcak okuma odası ambient ışığı ve ince keten dokusu */
+.library-ambient {
+  background-color: var(--bg-primary);
+  background-image:
+    radial-gradient(ellipse 90% 420px at 50% -60px, var(--lamp-glow), transparent 70%),
+    radial-gradient(var(--border-subtle) 0.75px, transparent 0.75px);
+  background-size: 100% 100%, 24px 24px;
+}
+
+.library-ambient.lamp-boost {
+  background-image:
+    radial-gradient(ellipse 85% 540px at 50% -40px, rgba(226, 158, 56, 0.26), transparent 72%),
+    radial-gradient(circle at 20% 28%, rgba(181, 137, 61, 0.09), transparent 45%),
+    radial-gradient(var(--border-subtle) 0.75px, transparent 0.75px);
+  background-size: 100% 100%, 100% 100%, 24px 24px;
+}
+
 .paper-grain {
-  background-image: radial-gradient(var(--border-subtle) 1px, transparent 1px);
-  background-size: 22px 22px;
+  background-image: radial-gradient(var(--border-subtle) 0.85px, transparent 0.85px);
+  background-size: 20px 20px;
+}
+
+/* Ceviz ahşap alınlık ve raf kirişi */
+.wood-beam {
+  background: linear-gradient(
+    180deg,
+    var(--bg-wood-light) 0%,
+    var(--bg-wood) 78%,
+    var(--bg-wood-ledge) 100%
+  );
+  border-bottom: 1.5px solid color-mix(in srgb, var(--border-brass) 55%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 232, 200, 0.14),
+    0 6px 18px -6px rgba(18, 10, 6, 0.45);
+}
+
+/* 3B ceviz kitaplık raf tablası */
+.wood-shelf-plank {
+  height: 18px;
+  border-radius: 3px;
+  background: linear-gradient(
+    180deg,
+    #6B452F 0%,
+    var(--bg-wood-light) 28%,
+    var(--bg-wood) 68%,
+    var(--bg-wood-ledge) 100%
+  );
+  border-top: 1px solid rgba(255, 224, 178, 0.24);
+  border-bottom: 1px solid #160C06;
+  box-shadow:
+    inset 0 2px 3px rgba(255, 226, 184, 0.14),
+    0 12px 20px -6px rgba(22, 12, 6, 0.42);
+}
+
+/* Kütüphane katalog fişi kartı */
+.catalog-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 253, 248, 0.55),
+    0 2px 6px -1px rgba(35, 25, 18, 0.08),
+    0 8px 18px -8px rgba(35, 25, 18, 0.12);
+}
+
+[data-theme="dark"] .catalog-card {
+  box-shadow:
+    inset 0 1px 0 rgba(244, 233, 216, 0.05),
+    0 4px 12px -2px rgba(0, 0, 0, 0.42);
+}
+
+/* 3B ciltli kitap kapağı & sayfa kalınlığı */
+.book-3d {
+  box-shadow:
+    inset 4px 0 6px rgba(255, 255, 255, 0.16),
+    inset -1px 0 2px rgba(0, 0, 0, 0.2),
+    3px 0 0 #EDE3D0,
+    4px 0 0 #C7B89E,
+    6px 6px 14px -3px rgba(20, 12, 6, 0.36);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+[data-theme="dark"] .book-3d {
+  box-shadow:
+    inset 4px 0 6px rgba(255, 255, 255, 0.12),
+    inset -1px 0 2px rgba(0, 0, 0, 0.35),
+    3px 0 0 #D8CBB5,
+    4px 0 0 #9D8F78,
+    6px 8px 16px -3px rgba(0, 0, 0, 0.65);
+}
+
+.group:hover .book-3d,
+.book-3d-hover:hover {
+  transform: translateY(-2px) rotate(-1deg);
+}
+
+/* Sarkan bordo kurdele kitap ayracı */
+.ribbon-bookmark {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
+  background: linear-gradient(180deg, #A3382C 0%, #7C2319 100%);
+  box-shadow: 0 2px 5px rgba(25, 8, 6, 0.32);
+}
+
+/* Çizgili not defteri sayfası */
+.ruled-paper {
+  background-color: var(--bg-card);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 27px,
+    color-mix(in srgb, var(--border-subtle) 55%, transparent) 27px,
+    color-mix(in srgb, var(--border-subtle) 55%, transparent) 28px
+  );
+  background-position-y: 8px;
 }
 
 ::-webkit-scrollbar {

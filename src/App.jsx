@@ -28,6 +28,7 @@ export default function App() {
   } = useBooks();
 
   const [activeTab, setActiveTab] = useState('kanban');
+  const [lampBoost, setLampBoost] = useState(true);
   const [formModalOpen, setFormModalOpen] = useState(false);
   const [editingBook, setEditingBook] = useState(null);
   const [defaultNewStatus, setDefaultNewStatus] = useState('todo');
@@ -49,13 +50,19 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-bg-primary text-text-primary flex flex-col">
+    <div
+      className={`min-h-screen library-ambient ${
+        lampBoost ? 'lamp-boost' : ''
+      } text-text-primary flex flex-col`}
+    >
       <Header
         activeTab={activeTab}
         onTabChange={setActiveTab}
         onAddBookClick={() => openAddBookModal('todo')}
         theme={state.settings.theme}
         onToggleTheme={toggleTheme}
+        lampBoost={lampBoost}
+        onToggleLampBoost={() => setLampBoost((v) => !v)}
         isDemoData={state.settings.isDemoData}
         onResetDemo={resetToDemo}
         onClearLibrary={clearLibrary}
@@ -69,7 +76,13 @@ export default function App() {
       )}
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-7">
-        <SummaryCards summary={summary} yearlyGoal={state.settings.yearlyGoal} />
+        <SummaryCards
+          books={state.books}
+          summary={summary}
+          yearlyGoal={state.settings.yearlyGoal}
+          onQuickProgress={updateBookProgress}
+          onOpenDetail={(book) => setDetailBookId(book.id)}
+        />
 
         {activeTab === 'kanban' && (
           <KanbanBoard
@@ -99,8 +112,8 @@ export default function App() {
         )}
       </main>
 
-      <footer className="border-t border-border-subtle py-4 px-4 sm:px-8 text-center text-xs text-text-secondary">
-        LIBRIS // Kişisel Kütüphane ve Okuma Panosu · Open Library API &amp; LocalStorage
+      <footer className="border-t border-border-subtle bg-bg-secondary/40 py-4 px-4 sm:px-8 text-center text-xs text-text-secondary">
+        LIBRIS // Kişisel Kütüphane ve Okuma Odası · Open Library API &amp; LocalStorage
       </footer>
 
       <BookFormModal

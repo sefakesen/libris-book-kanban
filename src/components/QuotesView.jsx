@@ -1,6 +1,7 @@
 import { Quote, Search, Trash2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { CATEGORIES, CATEGORY_LIST } from '../constants/bookConstants';
+import BookCover from './BookCover';
 
 export default function QuotesView({ books, onOpenBook, onRemoveQuote }) {
   const [query, setQuery] = useState('');
@@ -32,22 +33,22 @@ export default function QuotesView({ books, onOpenBook, onRemoveQuote }) {
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
           <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent-warm font-semibold">
-            OKUR NOTLARI & ARŞİV
+            OKUR DEFTERİ &amp; KENAR NOTLARI
           </span>
-          <h2 className="font-serif text-3xl font-medium text-text-primary mt-1">
-            Alıntılar ve Altı Çizili Satırlar
+          <h2 className="font-display text-3xl sm:text-4xl font-semibold text-text-primary mt-1">
+            Altı Çizili Satırlar
           </h2>
           <p className="text-sm text-text-secondary mt-1">
-            Okuduğunuz kitaplardan kaydettiğiniz tüm cümleler tek bir okuma defterinde toplanır.
+            Okuduğunuz kitaplardan kaydettiğiniz tüm cümleler çizgili okuma defterinizde toplanır.
           </p>
         </div>
-        <span className="font-mono text-xs text-text-secondary tabular-nums">
+        <span className="font-mono text-xs px-3 py-1 rounded-md border border-border-subtle bg-bg-card text-text-secondary tabular-nums">
           Toplam {allQuotes.length} kayıt
         </span>
       </div>
 
       {/* Arama ve Kategori */}
-      <div className="flex flex-col sm:flex-row gap-3">
+      <div className="catalog-card rounded-xl p-3.5 flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1 max-w-md">
           <Search className="w-4 h-4 text-text-secondary absolute left-3 top-1/2 -translate-y-1/2" />
           <input
@@ -55,14 +56,14 @@ export default function QuotesView({ books, onOpenBook, onRemoveQuote }) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Alıntı metni, kitap veya yazar ara..."
-            className="w-full rounded-lg border border-border-subtle bg-bg-card pl-9 pr-3 py-2 text-xs text-text-primary focus:outline-none focus:border-accent-primary"
+            className="w-full rounded-lg border border-border-subtle bg-bg-primary pl-9 pr-3 py-2 text-xs text-text-primary focus:outline-none focus:border-accent-primary"
           />
         </div>
 
         <select
           value={categoryFilter}
           onChange={(e) => setCategoryFilter(e.target.value)}
-          className="rounded-lg border border-border-subtle bg-bg-card px-3 py-2 text-xs text-text-primary focus:outline-none focus:border-accent-primary"
+          className="rounded-lg border border-border-subtle bg-bg-primary px-3 py-2 text-xs text-text-primary focus:outline-none focus:border-accent-primary"
         >
           <option value="all">Tüm Kategoriler</option>
           {CATEGORY_LIST.map((c) => (
@@ -74,24 +75,24 @@ export default function QuotesView({ books, onOpenBook, onRemoveQuote }) {
       </div>
 
       {allQuotes.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-border-subtle bg-bg-card p-12 text-center paper-grain">
+        <div className="catalog-card rounded-xl p-12 text-center ruled-paper">
           <Quote className="w-7 h-7 text-accent-warm mx-auto mb-3" />
-          <h3 className="font-serif text-xl font-medium text-text-primary">
-            Görüntülenecek alıntı bulunamadı
+          <h3 className="font-display text-2xl font-semibold text-text-primary">
+            Defterde henüz alıntı bulunmuyor
           </h3>
           <p className="text-xs text-text-secondary mt-1 max-w-md mx-auto">
-            Okuma panosundan herhangi bir kitabın kartına tıklayarak yeni alıntılar ve sayfa
+            Okuma odasından herhangi bir kitabın kapağına tıklayarak yeni alıntılar ve sayfa
             notları ekleyebilirsiniz.
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {allQuotes.map((item) => {
             const cat = CATEGORIES[item.book.category] || CATEGORIES.literature;
             return (
               <article
                 key={item.id}
-                className="rounded-xl border border-border-subtle bg-bg-card p-5 flex flex-col justify-between gap-4 paper-grain"
+                className="catalog-card rounded-xl p-5 flex flex-col justify-between gap-4 ruled-paper"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between gap-2">
@@ -102,26 +103,29 @@ export default function QuotesView({ books, onOpenBook, onRemoveQuote }) {
                     </span>
                     {item.page && (
                       <span className="font-mono text-[11px] text-accent-warm tabular-nums">
-                        s. {item.page}
+                        Sayfa {item.page}
                       </span>
                     )}
                   </div>
-                  <blockquote className="font-serif text-base text-text-primary leading-relaxed italic">
+                  <blockquote className="font-serif text-[16px] text-text-primary leading-relaxed italic border-l-2 border-accent-warm/60 pl-3.5">
                     &ldquo;{item.text}&rdquo;
                   </blockquote>
                 </div>
 
-                <div className="pt-3 border-t border-border-subtle flex items-center justify-between gap-2">
+                <div className="pt-3 border-t border-border-subtle flex items-center justify-between gap-3">
                   <button
                     type="button"
                     onClick={() => onOpenBook(item.book)}
-                    className="text-left min-w-0 cursor-pointer group"
+                    className="flex items-center gap-3 text-left min-w-0 cursor-pointer group"
                   >
-                    <div className="text-xs font-semibold text-text-primary group-hover:text-accent-primary truncate">
-                      {item.book.title}
-                    </div>
-                    <div className="text-[11px] text-text-secondary truncate">
-                      {item.book.author}
+                    <BookCover book={item.book} size="sm" />
+                    <div className="min-w-0">
+                      <div className="font-display text-base font-semibold text-text-primary group-hover:text-accent-primary truncate">
+                        {item.book.title}
+                      </div>
+                      <div className="text-[11px] text-text-secondary truncate">
+                        {item.book.author}
+                      </div>
                     </div>
                   </button>
 

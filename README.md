@@ -23,23 +23,26 @@
 
 ## Ekran Görüntüleri
 
-### 1. Üç Sütunlu Okuma Kanban Panosu
+### 1. Okuma Masası & Üç Sütunlu Ceviz Kanban Panosu
 ![LIBRIS Okuma Panosu](screenshots/kanban-board.png)
 
-### 2. Hedef, Kategori Dağılımı ve Veri Yönetimi
+### 2. Ahşap Kitaplık Rafı (Vitrin Görünümü)
+![LIBRIS Ahşap Kitaplık Rafı](screenshots/bookshelf-view.png)
+
+### 3. Sicil, Hedef ve Kütüphane Analizi
 ![LIBRIS Hedef ve Analiz](screenshots/quotes-analytics.png)
 
 ---
 
 ## Temel Özellikler
 
-- **3 Sütunlu Kanban Panosu (`Okunacak`, `Okunuyor`, `Bitti`):** Her kitap kartında kapak alanı, yazar adı, renkli kategori rozeti, toplam/okunan sayfa bilgisi ve hem tek tıkla durum değiştirme butonları hem de sürükle-bırak (Drag & Drop) desteği bulunur.
-- **Canlı Open Library API Entegrasyonu (`utils/api.js`):** Yeni kitap eklerken `https://openlibrary.org/search.json` üzerinden gerçek kitap adı, yazar, yayın yılı, sayfa sayısı ve kitap kapağı otomatik doldurulabilir.
-- **Akıllı Tipografik Kapak Fallback (`BookCover.jsx`):** Kapak görseli bulunmayan veya yavaş yüklenen kitaplar için kitabın adına, yazarına ve kategori rengine göre ciltli tipografik kapak render edilir.
-- **Sayfa İlerlemesi ve Yıldız Puanlama:** "Okunuyor" sütunundaki kitaplarda anlık `+15 sayfa ilerle` butonu ve detay modalında sayfa kaydırıcısı; "Bitti" kitaplarında 1–5 yıldız değerlendirmesi yer alır.
-- **Alıntılar ve Okuma Notları:** Kitap detay modalı üzerinden sayfa numaralı alıntılar eklenebilir ve "Alıntılar & Notlar" sekmesinde tüm kitaplardan kaydedilen cümleler arasında arama yapılabilir.
+- **Klasik Okuma Odası (Dark Academia) Atmosferi:** Ceviz ahşap alınlık ve raf kirişleri, sıcak parşömen kağıdı, 3B ciltli ve sayfa kalınlıklı kitap kapakları (`.book-3d`), kurdele ayraçlar ve "Masa Lambası" ışıklandırma desteği.
+- **Okuma Masası Vitrini & 3 Sütunlu Kanban + Ahşap Raf Modu:** Üstte aktif okunan kitabın açık durduğu *Okuma Masası* ve *Ex Libris Kütüphane Sicili*; altta hem sürükle-bırak destekli 3 sütunlu Kanban (`Okunacak`, `Okunuyor`, `Bitti`) hem de tek tıkla geçilebilen yatay **Ahşap Kitaplık Rafı** görünümü yer alır.
+- **Yağmur / Şömine Ambiyansı & Okuma Seansı Sayacı (`utils/ambienceAudio.js`):** Harici ses dosyasına ihtiyaç duymadan tarayıcı Web Audio API ile sakin yağmur ve şömine sesi üreten ambiyans kontrolleri ile okuma seansı kronometresi.
+- **İki Sayfalı "Açık Kitap" Detay Defteri (`BookDetailModal.jsx`):** Sol sayfada kitap künyesi, durum geçişleri, yıldız puanı ve sayfa ilerleme kaydırıcısı; sağ sayfada çizgili defter üzerinde sayfa numaralı alıntı ve kenar notu ekleme alanı.
+- **Canlı Open Library API Entegrasyonu (`utils/api.js`):** Yeni eser eklerken `https://openlibrary.org/search.json` üzerinden gerçek kitap adı, yazar, yayın yılı, sayfa sayısı ve kitap kapağı otomatik doldurulabilir; kapaksız kitaplar için pirinç çerçeveli 3B tipografik cilt üretilir.
 - **LocalStorage Kalıcılığı ve JSON Yedekleme (`utils/storage.js`):** Veriler tarayıcıda kalıcı olarak saklanır, JSON olarak dışa aktarılabilir ve güvenli şema doğrulamasıyla içe aktarılabilir.
-- **Açık ("Kütüphane Kağıdı") ve Koyu ("Gece Okuması") Tema:** CSS değişkenleri tabanlı çift tema desteği.
+- **Gündüz ("Sıcak Parşömen") ve Gece ("Masa Lambası & Maun") Teması:** CSS değişkenleri tabanlı çift tema desteği.
 
 ---
 
@@ -60,24 +63,27 @@
 ```text
 libris-book-kanban/
 ├── screenshots/
+│   ├── bookshelf-view.png
 │   ├── kanban-board.png
 │   └── quotes-analytics.png
 ├── src/
 │   ├── components/
 │   │   ├── AnalyticsView.jsx     # Kategori analizi, yıllık hedef ve JSON yedekleme
-│   │   ├── BookCard.jsx          # Kapak, yazar, kategori rozeti, ilerleme ve durum butonları
-│   │   ├── BookCover.jsx         # Gerçek kapak + tipografik cilt fallback bileşeni
-│   │   ├── BookDetailModal.jsx   # Sayfa kaydırıcısı, 1-5 puanlama ve alıntı ekleme modalı
-│   │   ├── BookFormModal.jsx     # Open Library API arama + manuel kitap ekleme/düzenleme
-│   │   ├── Header.jsx            # Üst gezinme, tema geçişi, örnek veri/temizleme kontrolleri
-│   │   ├── KanbanBoard.jsx       # Arama/filtreleme ve 3 sütunlu Drag & Drop Kanban
-│   │   ├── QuotesView.jsx        # Tüm kitaplardan alıntılar ve notlar akışı
-│   │   └── SummaryCards.jsx      # Üst özet metrik kartları
+│   │   ├── BookCard.jsx          # Katalog fişi kartı, 3B kapak, kurdele ayraç ve durum butonları
+│   │   ├── BookCover.jsx         # 3B ciltli gerçek kapak + pirinç çerçeveli tipografik fallback
+│   │   ├── BookDetailModal.jsx   # İki sayfalı Açık Kitap defteri (ilerleme + çizgili alıntılar)
+│   │   ├── BookFormModal.jsx     # Open Library API arama + manuel eser kayıt fişi
+│   │   ├── BookshelfView.jsx     # 3B ceviz ahşap raflar üzerinde kitaplık vitrini
+│   │   ├── Header.jsx            # Ceviz alınlık, sekmeler, ambiyans sesi, masa lambası ve sayaç
+│   │   ├── KanbanBoard.jsx       # Arama/filtreleme, görünüm geçişi ve 3 sütunlu Kanban
+│   │   ├── QuotesView.jsx        # Çizgili okuma defterinde altı çizili satırlar akışı
+│   │   └── SummaryCards.jsx      # Okuma Masası vitrini ve Ex Libris kütüphane sicili
 │   ├── constants/
 │   │   └── bookConstants.js      # Sütun ve kategori tanımları
 │   ├── hooks/
 │   │   └── useBooks.js           # Custom hook (tüm CRUD, ilerleme, alıntı ve tema state'i)
 │   ├── utils/
+│   │   ├── ambienceAudio.js      # Web Audio API tabanlı yağmur ve şömine ambiyans üreteci
 │   │   ├── api.js                # Open Library API istemcisi (timeout ve sanitizasyon)
 │   │   ├── seedData.js           # 9 kitaplık başlangıç kütüphanesi
 │   │   └── storage.js            # LocalStorage, XSS/Prototype Pollution korumalı doğrulama
