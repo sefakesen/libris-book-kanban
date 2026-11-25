@@ -36,7 +36,8 @@
 
 ## Temel Özellikler
 
-- **Klasik Okuma Odası (Dark Academia) Atmosferi:** Ceviz ahşap alınlık ve raf kirişleri, sıcak parşömen kağıdı, 3B ciltli ve sayfa kalınlıklı kitap kapakları (`.book-3d`), kurdele ayraçlar ve "Masa Lambası" ışıklandırma desteği.
+- **Görselli Dark Academia Kütüphane Atmosferi & Varsayılan Gece Modu:** Sayfa arka planı ve giriş hero sahnesinde (`LibraryHero.jsx`) yüksek ceviz raflı, banker lambalı ve gotik pencereli özel dark academia illüstrasyonu (`/images/library-hero.jpg`) yer alır; site varsayılan olarak koyu mum ışığı/maun temasıyla açılır (isteğe bağlı gündüz parşömen modu da mevcuttur) ve tüm kartlar yarı saydam koyu ahşap/deri paneller olarak görünür.
+- **Klasik Okuma Odası Detayları:** Ceviz ahşap alınlık ve raf kirişleri, 3B ciltli ve sayfa kalınlıklı kitap kapakları (`.book-3d`), kurdele ayraçlar ve "Masa Lambası" ışıklandırma desteği.
 - **Okuma Masası Vitrini & 3 Sütunlu Kanban + Ahşap Raf Modu:** Üstte aktif okunan kitabın açık durduğu *Okuma Masası* ve *Ex Libris Kütüphane Sicili*; altta hem sürükle-bırak destekli 3 sütunlu Kanban (`Okunacak`, `Okunuyor`, `Bitti`) hem de tek tıkla geçilebilen yatay **Ahşap Kitaplık Rafı** görünümü yer alır.
 - **Yağmur / Şömine Ambiyansı & Okuma Seansı Sayacı (`utils/ambienceAudio.js`):** Harici ses dosyasına ihtiyaç duymadan tarayıcı Web Audio API ile sakin yağmur ve şömine sesi üreten ambiyans kontrolleri ile okuma seansı kronometresi.
 - **İki Sayfalı "Açık Kitap" Detay Defteri (`BookDetailModal.jsx`):** Sol sayfada kitap künyesi, durum geçişleri, yıldız puanı ve sayfa ilerleme kaydırıcısı; sağ sayfada çizgili defter üzerinde sayfa numaralı alıntı ve kenar notu ekleme alanı.
@@ -62,6 +63,9 @@
 
 ```text
 libris-book-kanban/
+├── public/
+│   └── images/
+│       └── library-hero.jpg      # Dark Academia kütüphane arka plan ve hero illüstrasyonu
 ├── screenshots/
 │   ├── bookshelf-view.png
 │   ├── kanban-board.png
@@ -76,6 +80,7 @@ libris-book-kanban/
 │   │   ├── BookshelfView.jsx     # 3B ceviz ahşap raflar üzerinde kitaplık vitrini
 │   │   ├── Header.jsx            # Ceviz alınlık, sekmeler, ambiyans sesi, masa lambası ve sayaç
 │   │   ├── KanbanBoard.jsx       # Arama/filtreleme, görünüm geçişi ve 3 sütunlu Kanban
+│   │   ├── LibraryHero.jsx       # Görselli Dark Academia giriş hero'su ve Günün Alıntısı
 │   │   ├── QuotesView.jsx        # Çizgili okuma defterinde altı çizili satırlar akışı
 │   │   └── SummaryCards.jsx      # Okuma Masası vitrini ve Ex Libris kütüphane sicili
 │   ├── constants/

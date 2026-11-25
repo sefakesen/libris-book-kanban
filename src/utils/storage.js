@@ -146,7 +146,7 @@ export function validateAndSanitizeLibrary(raw) {
     books,
     settings: {
       yearlyGoal,
-      theme: rawSettings.theme === 'dark' ? 'dark' : 'light',
+      theme: rawSettings.theme === 'light' ? 'light' : 'dark',
       isDemoData: Boolean(rawSettings.isDemoData),
     },
   };

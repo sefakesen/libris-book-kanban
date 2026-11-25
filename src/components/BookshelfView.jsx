@@ -23,7 +23,7 @@ export default function BookshelfView({
         return (
           <section
             key={shelf.id}
-            className="rounded-xl border border-border-subtle bg-bg-secondary/40 overflow-hidden shadow-sm"
+            className="rounded-xl border border-border-subtle bg-bg-secondary/60 backdrop-blur-sm overflow-hidden shadow-sm"
           >
             {/* Raf Üst Pirinç Plaketi */}
             <div className="px-5 py-3 border-b border-border-subtle bg-bg-card/85 flex items-center justify-between gap-3">

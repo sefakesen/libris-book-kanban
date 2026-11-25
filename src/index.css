@@ -43,28 +43,26 @@
   --accent-amber: #A66A17;
   --accent-amber-soft: #F8EBD2;
   --danger: #991B1B;
-  --lamp-glow: rgba(214, 152, 62, 0.14);
 }
 
 [data-theme="dark"] {
-  --bg-primary: #16110D;
-  --bg-secondary: #211A14;
-  --bg-card: #281F18;
+  --bg-primary: #0E0A07;
+  --bg-secondary: #1A130E;
+  --bg-card: #1F1711;
   --bg-wood: #2A1910;
   --bg-wood-light: #3E2619;
   --bg-wood-ledge: #120A06;
-  --border-subtle: #3E3025;
-  --border-brass: #C89B4B;
-  --text-primary: #F4E9D8;
-  --text-secondary: #B39F8A;
+  --border-subtle: #3A2C20;
+  --border-brass: #C9A45C;
+  --text-primary: #F2E6D2;
+  --text-secondary: #B8A48C;
   --accent-primary: #4FA37D;
   --accent-primary-soft: #1A3126;
   --accent-warm: #D46559;
   --accent-warm-soft: #3B1D1A;
-  --accent-amber: #E0A343;
+  --accent-amber: #D9A24A;
   --accent-amber-soft: #382812;
   --danger: #F87171;
-  --lamp-glow: rgba(224, 163, 67, 0.16);
 }
 
 * {
@@ -86,21 +84,46 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-/* Sıcak okuma odası ambient ışığı ve ince keten dokusu */
-.library-ambient {
-  background-color: var(--bg-primary);
-  background-image:
-    radial-gradient(ellipse 90% 420px at 50% -60px, var(--lamp-glow), transparent 70%),
-    radial-gradient(var(--border-subtle) 0.75px, transparent 0.75px);
-  background-size: 100% 100%, 24px 24px;
+/* Gerçek görselli Dark Academia sabit arka plan sahnesi */
+.academia-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  background-image: url('/images/library-hero.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
-.library-ambient.lamp-boost {
-  background-image:
-    radial-gradient(ellipse 85% 540px at 50% -40px, rgba(226, 158, 56, 0.26), transparent 72%),
-    radial-gradient(circle at 20% 28%, rgba(181, 137, 61, 0.09), transparent 45%),
-    radial-gradient(var(--border-subtle) 0.75px, transparent 0.75px);
-  background-size: 100% 100%, 100% 100%, 24px 24px;
+.academia-backdrop::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10, 7, 5, 0.78) 0%, rgba(10, 7, 5, 0.86) 45%, rgba(10, 7, 5, 0.94) 100%),
+    radial-gradient(ellipse at 50% 0%, transparent 0%, rgba(0, 0, 0, 0.45) 75%);
+}
+
+.academia-backdrop.lamp-boost::after {
+  background:
+    radial-gradient(ellipse 70% 50% at 30% 20%, rgba(217, 162, 74, 0.16), transparent 70%),
+    linear-gradient(180deg, rgba(10, 7, 5, 0.74) 0%, rgba(10, 7, 5, 0.84) 45%, rgba(10, 7, 5, 0.93) 100%);
+}
+
+:root:not([data-theme="dark"]) .academia-backdrop::after {
+  background: linear-gradient(180deg, rgba(242, 232, 217, 0.86), rgba(242, 232, 217, 0.94));
+}
+
+.gilt-text {
+  background: linear-gradient(180deg, #F3DFA8 0%, #C9A45C 55%, #9C7A3C 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gilt-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C9A45C 20%, #C9A45C 80%, transparent);
 }
 
 .paper-grain {
@@ -142,7 +165,7 @@ body {
 
 /* Kütüphane katalog fişi kartı */
 .catalog-card {
-  background-color: var(--bg-card);
+  background-color: color-mix(in srgb, var(--bg-card) 92%, transparent);
   border: 1px solid var(--border-subtle);
   box-shadow:
     inset 0 1px 0 rgba(255, 253, 248, 0.55),
@@ -151,6 +174,9 @@ body {
 }
 
 [data-theme="dark"] .catalog-card {
+  background-color: rgba(28, 20, 14, 0.82);
+  border-color: rgba(201, 164, 92, 0.22);
+  backdrop-filter: blur(6px);
   box-shadow:
     inset 0 1px 0 rgba(244, 233, 216, 0.05),
     0 4px 12px -2px rgba(0, 0, 0, 0.42);

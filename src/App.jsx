@@ -4,6 +4,7 @@ import BookDetailModal from './components/BookDetailModal';
 import BookFormModal from './components/BookFormModal';
 import Header from './components/Header';
 import KanbanBoard from './components/KanbanBoard';
+import LibraryHero from './components/LibraryHero';
 import QuotesView from './components/QuotesView';
 import SummaryCards from './components/SummaryCards';
 import { useBooks } from './hooks/useBooks';
@@ -50,11 +51,12 @@ export default function App() {
   };
 
   return (
-    <div
-      className={`min-h-screen library-ambient ${
-        lampBoost ? 'lamp-boost' : ''
-      } text-text-primary flex flex-col`}
-    >
+    <div className="min-h-screen relative isolate text-text-primary flex flex-col">
+      <div
+        className={`academia-backdrop ${lampBoost ? 'lamp-boost' : ''}`}
+        aria-hidden="true"
+      />
+
       <Header
         activeTab={activeTab}
         onTabChange={setActiveTab}
@@ -76,6 +78,12 @@ export default function App() {
       )}
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-7">
+        <LibraryHero
+          books={state.books}
+          onAddBookClick={() => openAddBookModal('todo')}
+          onOpenDetail={(b) => setDetailBookId(b.id)}
+        />
+
         <SummaryCards
           books={state.books}
           summary={summary}
@@ -112,7 +120,7 @@ export default function App() {
         )}
       </main>
 
-      <footer className="border-t border-border-subtle bg-bg-secondary/40 py-4 px-4 sm:px-8 text-center text-xs text-text-secondary">
+      <footer className="bg-black/30 backdrop-blur-sm border-t border-[#C9A45C]/20 py-4 px-4 sm:px-8 text-center text-xs text-text-secondary">
         LIBRIS // Kişisel Kütüphane ve Okuma Odası · Open Library API &amp; LocalStorage
       </footer>
 

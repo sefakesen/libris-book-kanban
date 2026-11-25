@@ -48,6 +48,7 @@ export default function SummaryCards({
 
   return (
     <section
+      id="reading-desk"
       className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch"
       aria-label="Okuma masası ve kütüphane sicili"
     >

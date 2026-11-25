@@ -5,7 +5,7 @@ export function createSeedLibrary() {
     version: 1,
     settings: {
       yearlyGoal: 20,
-      theme: 'light',
+      theme: 'dark',
       isDemoData: true,
     },
     books: [
@@ -189,12 +189,12 @@ export function createSeedLibrary() {
   };
 }
 
-export function createEmptyLibrary(theme = 'light', yearlyGoal = 20) {
+export function createEmptyLibrary(theme = 'dark', yearlyGoal = 20) {
   return {
     version: 1,
     settings: {
       yearlyGoal,
-      theme: theme === 'dark' ? 'dark' : 'light',
+      theme: theme === 'light' ? 'light' : 'dark',
       isDemoData: false,
     },
     books: [],

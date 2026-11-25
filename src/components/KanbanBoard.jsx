@@ -142,7 +142,7 @@ export default function KanbanBoard({
                 className={`rounded-xl border transition-colors min-h-[430px] flex flex-col overflow-hidden ${
                   isDragOver
                     ? 'border-accent-primary bg-accent-primary-soft/45'
-                    : 'border-border-subtle bg-bg-secondary/45'
+                    : 'border-border-subtle bg-bg-secondary/60 backdrop-blur-sm'
                 }`}
               >
                 {/* Ceviz Ahşap Sütun Başlığı */}
