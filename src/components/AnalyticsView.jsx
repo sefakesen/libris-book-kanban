@@ -1,7 +1,6 @@
 import {
   CheckCircle2,
   Download,
-  FileCode2,
   Target,
   Upload,
 } from 'lucide-react';
@@ -219,54 +218,6 @@ export default function AnalyticsView({
                 className="hidden"
               />
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Yönerge Uyumluluk Kartı */}
-      <div className="catalog-card rounded-xl p-6 space-y-4 paper-grain">
-        <div className="flex items-center gap-2">
-          <FileCode2 className="w-5 h-5 text-accent-primary" />
-          <h3 className="font-display text-xl font-semibold text-text-primary">
-            Web Geliştirme Proje Yönergesi Mimarisi
-          </h3>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 text-xs">
-          <div className="rounded-lg border border-border-subtle bg-bg-primary p-4 space-y-1">
-            <span className="font-mono text-[10px] text-accent-primary font-semibold">
-              TEKNOLOJİ &amp; API
-            </span>
-            <p className="text-text-secondary leading-relaxed">
-              React 19, Vite 6, Tailwind CSS v4, LocalStorage kalıcılığı ve canlı Open Library
-              Search API entegrasyonu.
-            </p>
-          </div>
-          <div className="rounded-lg border border-border-subtle bg-bg-primary p-4 space-y-1">
-            <span className="font-mono text-[10px] text-accent-primary font-semibold">
-              MODÜLER YAPI
-            </span>
-            <p className="text-text-secondary leading-relaxed">
-              Custom hook (`useBooks.js`), API/Depolama yardımcıları (`utils/api.js`, `storage.js`)
-              ve tek sorumluluklu bileşenler.
-            </p>
-          </div>
-          <div className="rounded-lg border border-border-subtle bg-bg-primary p-4 space-y-1">
-            <span className="font-mono text-[10px] text-accent-primary font-semibold">
-              GÜVENLİK
-            </span>
-            <p className="text-text-secondary leading-relaxed">
-              HTTP/HTTPS URL doğrulama, 2 MB import sınırı, Prototype Pollution koruması ve API
-              zaman aşımı kontrolü.
-            </p>
-          </div>
-          <div className="rounded-lg border border-border-subtle bg-bg-primary p-4 space-y-1">
-            <span className="font-mono text-[10px] text-accent-primary font-semibold">
-              DAĞITIM
-            </span>
-            <p className="text-text-secondary leading-relaxed">
-              Vercel (`vercel.json`) ve Netlify (`netlify.toml`) için hazır yapılandırma ile tek
-              tıkla canlıya alınabilir.
-            </p>
           </div>
         </div>
       </div>
